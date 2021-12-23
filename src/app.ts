@@ -7,6 +7,7 @@ import './db/typeorm.db'
 import { Server } from 'socket.io'
 import { authorize } from '@thream/socketio-jwt'
 import connection from './websocket/connected.socket'
+
 export class App {
     public readonly app : express.Application
     public readonly server: http.Server;
@@ -31,7 +32,7 @@ export class App {
     }
 
     private socket () {
-      this.io.use(authorize({ secret: process.env.JWT_SECRET }))
+      this.io.use(authorize({ secret: (process.env.JWT_SECRET as string) }))
       this.io.on('connection', (socket) => connection(socket))
     }
 
