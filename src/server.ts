@@ -1,3 +1,3 @@
 import { app } from './app'
 
-app.server.listen(5000, () => console.log('express application'))
+app.server.listen(4000, () => console.log('express application'))

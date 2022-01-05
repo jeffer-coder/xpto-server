@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import { router } from './app/router'
 import './db/typeorm.db'
 import { Server } from 'socket.io'
+import cors from 'cors';
 import { authorize } from '@thream/socketio-jwt'
 import connection from './websocket/connected.socket'
 
@@ -27,6 +28,7 @@ export class App {
     private middlewares () {
       this.app.use(parser.json())
       this.app.use(parser.urlencoded({ extended: true }))
+      this.app.use(cors())
       this.app.use(morgan('dev'))
       this.socket()
     }

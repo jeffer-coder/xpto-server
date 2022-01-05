@@ -6,7 +6,12 @@ import { userRepository } from '../repositories/user.repository'
 class UserService {
   public async signup (createDto: CreateUserDto) {
     const user = await userRepository.insert(createDto)
-    return user
+    return {
+      id: user.id,
+      avatar: user.avatar,
+      username: user.username,
+      email: user.email
+    }
   }
 
   public async signin (email: string, password: string) {
@@ -19,7 +24,7 @@ class UserService {
     const token = sign({ sub: user.id })
 
     return {
-      user: user.id,
+      id: user.id,
       avatar: user.avatar,
       username: user.username,
       email: user.email,
